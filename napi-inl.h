@@ -1530,6 +1530,20 @@ inline size_t ArrayBuffer::ByteLength() {
   return length;
 }
 
+#if NAPI_VERSION >= 7
+inline bool ArrayBuffer::IsDetached() const {
+  bool detached;
+  napi_status status = napi_is_detached_arraybuffer(_env, _value, &detached);
+  NAPI_THROW_IF_FAILED(_env, status, false);
+  return detached;
+}
+
+inline void ArrayBuffer::Detach() {
+  napi_status status = napi_detach_arraybuffer(_env, _value);
+  NAPI_THROW_IF_FAILED_VOID(_env, status);
+}
+#endif  // NAPI_VERSION >= 7
+
 ////////////////////////////////////////////////////////////////////////////////
 // DataView class
 ////////////////////////////////////////////////////////////////////////////////
@@ -4730,6 +4744,7 @@ inline void AsyncProgressWorkerBase<DataType>::OnAsyncWorkProgress(Napi::Env /* 
                                 void* data) {
   ThreadSafeData* tsd = static_cast<ThreadSafeData*>(data);
   tsd->asyncprogressworker()->OnWorkProgress(tsd->data());
+  delete tsd;
 }
 
 template <typename DataType>

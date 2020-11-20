@@ -140,6 +140,10 @@
       "url": "https://github.com/KevinEady"
     },
     {
+      "name": "Koki Nishihara",
+      "url": "https://github.com/Nishikoh"
+    },
+    {
       "name": "Konstantin Tarkus",
       "url": "https://github.com/koistya"
     },
@@ -196,6 +200,10 @@
       "url": "https://github.com/anurbol"
     },
     {
+      "name": "pacop",
+      "url": "https://github.com/pacop"
+    },
+    {
       "name": "Philipp Renoth",
       "url": "https://github.com/DaAitch"
     },
@@ -240,6 +248,10 @@
       "url": "https://github.com/tux3"
     },
     {
+      "name": "Vlad Velmisov",
+      "url": "https://github.com/Velmisov"
+    },
+    {
       "name": "Yohei Kishimoto",
       "url": "https://github.com/morokosi"
     },
@@ -253,6 +265,9 @@
   "devDependencies": {
     "benchmark": "^2.1.4",
     "bindings": "^1.5.0",
+    "clang-format": "^1.4.0",
+    "fs-extra": "^9.0.1",
+    "pre-commit": "^1.2.2",
     "safe-buffer": "^5.1.1"
   },
   "directories": {},
@@ -287,7 +302,10 @@
     "dev": "node test",
     "predev:incremental": "node-gyp configure build -C test --debug",
     "dev:incremental": "node test",
-    "doc": "doxygen doc/Doxyfile"
+    "doc": "doxygen doc/Doxyfile",
+    "lint": "node scripts/clang-format.js",
+    "lint:fix": "git-clang-format"
   },
-  "version": "3.0.1"
+  "pre-commit": "lint",
+  "version": "3.0.2"
 }
